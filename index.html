@@ -1,0 +1,799 @@
+<!doctype html>
+<HTML lang="en">
+
+<link rel="stylesheet" href="mystyle.css">
+
+    <head>
+		<title>Project 2</title>
+		<meta charset="utf-8">
+	</head>
+
+
+    <body>
+      <h2>Last.fm music charts</h2>
+
+      <!-- Grid container for inputs and buttons -->
+      <div class="grid-container">
+        <div class="grid-item"><input type="text" id=search placeholder="Search for artists">
+          <input type="text" id=albumSearch placeholder= "Search for album info">
+        </div>
+        <div class="grid-item"></div>
+        <div class="grid-item"><br></div>
+        <div class="grid-item"><br>
+          <button id="bioButton">Bio</button>
+          <div id="bioSummary" ></div>
+          <div id="alert3"></div>
+          <br> <button id="trackButton">Tracks</button>
+          <div id="trackInfo"><br></div>
+          <div id="alert2"></div></div>
+        <div class="grid-item"><br>
+          <button id="albumsButton">Album cover</button>
+          <br>
+          <br>
+          <img id="imgInfo"></img>
+          <div id=alert></div>
+    </div>
+    <div class="grid-item"><br><button id="albumButton">Albums</button>
+      <div id="albumInfo"></div>
+      <br></div> 
+    <div id="alert4"></div>
+        <div class="grid-item"> </div>
+        <div class="grid-item"></div>
+        <!-- Coder's own top10 Last.fm charts with biography and photo goes down here -->
+        <div class="grid-item"><div id=draugoreCharts>
+          <h3>Draugore's top 10</h3>
+    
+          <button id=numberOne> Nightwish </button>
+          <br>
+          <div id="one"></div>
+          <div id="photoOne"></div>
+          <br>
+          <button id=numberTwo> Turisas </button>
+          <div id="two"></div>
+          <div id="photoTwo"></div>
+          <br>
+          <button id=numberThree> Eluveitie </button>
+          <div id="three"></div>
+          <div id ="photoThree"></div>
+          <br>
+          <button id=numberFour> Viikate </button>
+          <div id="four"></div>
+          <div id="photoFour"></div>
+          <br>
+          <button id=numberFive> Amorphis </button>
+          <div id="five"></div>
+          <div id="photoFive"></div>
+          <br>
+          <button id=numberSix> Moonsorrow </button>
+          <div id="six"></div>
+          <div id="photoSix"></div>
+          <br>
+          <button id=numberSeven> Howard Shore </button>
+          <div id="seven"></div>
+          <div id="photoSeven"></div>
+          <br>
+          <button id=numberEight> Leaves' Eyes </button>
+          <div id="eight"></div>
+          <div id=photoEight></div>
+          <br>
+          <button id=numberNine> Stam1na </button>
+          <div id="nine"></div>
+          <div id="photoNine"></div>
+          <br>
+          <button id=numberTen> Rasputina </button>
+          <div id="ten"></div>
+          <div id="photoTen"></div>
+          <br>
+        </div>
+    </div>
+      </div> 
+
+
+   
+
+    <script>
+
+      //Button counts for closing and opening the buttons
+      var albumButtonCount = 0; // counting how many times the buttons are clicked
+      var bioButtonCount = 0;   // counting how many times the buttons are clicked
+      var numberOneCount = 0;   // counting how many times the buttons are clicked
+      var numberTwoCount = 0;   // counting how many times the buttons are clicked
+      var numberThreeCount = 0; // counting how many times the buttons are clicked
+      var numberFourCount = 0;  // counting how many times the buttons are clicked
+      var numberFiveCount = 0;  // counting how many times the buttons are clicked
+      var numberSixCount = 0;   // counting how many times the buttons are clicked
+      var numberSevenCount = 0; // counting how many times the buttons are clicked
+      var numberEightCount = 0; // counting how many times the buttons are clicked
+      var numberNineCount = 0;  // counting how many times the buttons are clicked
+      var numberTenCount = 0;   // counting how many times the buttons are clicked
+      var albumsButtonCount = 0;// counting how many times the buttons are clicked
+      var trackButtonCount = 0; // counting how many times the buttons are clicked
+
+      // Background image and alert2 div text colour
+      document.body.style.backgroundImage="url('https://wallpaperaccess.com/full/1326876.jpg')"; // background image for the page
+      document.getElementById("alert2").style.color="azure";  // alert2 DIV text colour
+
+    function isArtistInputOK(input1){   // function to check if the inpur from artist-field is ok
+      let isInputOK = true;             // setting the variable isInputOK to boolean true in the beginning
+
+      if(input1 == null || input1 == "" || input1.length > 30)   // checking if the input is null, empty or longer than 30 characters
+            {
+                var input = document.getElementById("search"); //adding the input to the div-element search
+                alert("Please add a proper artist name");      // Alert to let the user know the text is too long
+                isInputOK = false;                             // Setting the isInputOK variable to false, as some of the if-sentence rules got broken
+                
+                search.style.borderColor = "red";    // adding some features like red borders when text field is submitted empty
+                search.select();                     // selecting all the text from the input field
+                search.focus();                      // setting the focus on the input field
+            }else{                                   // staring else-sentence, if the if-sentence doesn't go through it will jump here
+              search.style.removeProperty("border"); // deleting the red border from the input field
+            }
+          return isInputOK;                         // returning the isInputOK variable
+    }
+
+    function isAlbumInputOK(input2){               // function to check if the input from album field is ok
+      let isInputOK = true;                        // setting the variable isInputOK to true in the beginning, if the input is not acceptable
+                                                   // this bit will be set to false
+      if(input2 == null || input2 == "" || input2.length > 30){ // checking if the input is null, empty or longer than 30 characters
+  
+        alert("Please add a proper album name");   // alert to let the user know the text is too long
+        isInputOK = false;                         // setting the isInputOK variable to false
+  
+        albumSearch.style.borderColor = "red";     // adding some features like red borders when text field is submitted empty
+        albumSearch.select();                      // selecting all the text from the input field
+        albumSearch.focus();                       // setting the focus on the input field
+      }else{                                       // staring else-sentence, if the if-sentence doesn't go through it will jump here
+        albumSearch.style.removeProperty("border"); // deleting the red border from the input field when the input field is acceptable
+      }
+      return isInputOK;                            // returning the isInputOK variable
+    }
+
+      
+    // Tracks parsing and button functionality
+    document.getElementById("trackButton").addEventListener("click", parsingTracks); // dynamically added onclick to run parsing Tracks-function
+    
+    // Function to parse the track of the album in the XML file
+    function parsingTracks(){   // staring function Parsing Tracks
+      
+    var api= "http://ws.audioscrobbler.com/2.0/?method=album.getinfo"; // getting the basic part of API-address
+        var band = "&artist=";   // adding the artist part to the API-address
+        var apiKey= "&api_key=cb69910029b323867877c58ef0071f7a";  //adding the API-key to the API-address
+        var album = "&album=" // adding album-part to the API-address
+      
+
+        var input1 = document.getElementById("search").value;      // selecting the input element and getting it's value + adding it to variable
+        var input2 = document.getElementById("albumSearch").value; // selecting the input-2 element and getting it's value + adding it to variable
+        
+        if(isArtistInputOK(input1) && isAlbumInputOK(input2)){   // calling the functions to validate the input
+        var url = api + apiKey + band + input1 + album+ input2;  // making a whole url for API with little parts as well as inputs
+
+        var xmlhttp = new XMLHttpRequest(); // creating a new XMLHTTPRequest
+        xmlhttp.open("GET",url, true);      // initializing the created XMLHttpRequest
+        xmlhttp.send();                     // sending the new xmlhttpRequest
+      
+        xmlhttp.onreadystatechange= function(){  // opening a function and defining it to react on readyState changes
+          trackButtonCount++;                    // incrementing the track button counter. If the button is clicked, the counter will be incremented
+                                                 // If the buttton is clicked again, this counter will be used to close the div. The value will be
+                                                 // also set to zero.
+          if(xmlhttp.readyState == 4 && xmlhttp.status==200) // defining the readyState to be finished request and xmlhttp status to OK
+          {
+            var xmlDoc = xmlhttp.responseXML; // saving the responseXML to variable
+      
+            let txt = "";   // variable to save the parsed tracks from XML
+            var album = xmlDoc.getElementsByTagName("album");      // digging out tags from xml-file and saving them to a variable
+            var tracks = album[0].getElementsByTagName("tracks");  // digging out tags from xml-file and saving them to a variable
+            if(tracks.length < 1){                                 // if the track-tags length is smaller than one, the album is not found
+              document.getElementById("alert2").innerHTML = "Album not found";  //insert text "album not found" to div "alert2"
+            }
+            else{  // if the album is found, iterate through the tracks 
+              var track = tracks[0].getElementsByTagName("track");// digging out the tags from xml-file and saving them to variable
+              var name = "";                                      // name of the trackes are saved one-by-one to this variable
+              for (i=0; i < track.length; i++) {                  // creating for-loop to iterate through tracks in the album
+                name = track[i].getElementsByTagName('name').item(0).firstChild.nodeValue;  // saving the names under track-tags to variable name
+                txt += "<br><strong>" + name + "</strong>";      // txt-variable is line-break, strong characters + name of the track
+                document.getElementById("trackInfo").innerHTML = txt; // placing the txt-variable to the "trackInfo" div
+              }
+            }
+          }
+          else{ //if the code doesn't find the album or artist it will jump here
+            document.getElementById("alert2").innerHTML= "API Address not found. <br> Check input fields"; // error message to let the user know the search wasn't successful
+          }
+        
+        if(trackButtonCount > 1){                                // counter of how many times the buttons were opened, if more than one
+            document.getElementById("trackInfo").innerHTML = ""; // it will blank the "trackInfo" div 
+            document.getElementById("alert2").innerHTML = "";    // and "alert2" div
+            trackButtonCount = 0;                                // setting the counter to 0 again
+          }
+        }
+      }else{                                                   // if the inputs weren't ok the code will jump here
+        document.getElementById("trackInfo").innerHTML = "";   // and blank the "trackInfo"
+        document.getElementById("alert2").innerHTML = "";      // and "alert2" divs
+      }
+    }
+    
+      
+      
+
+      // Albums parsing and button functionality      
+      document.getElementById("albumsButton").addEventListener("click", parsingAlbumCovers); //dynamically added onclick to run parsing Albums-function
+      
+      // function to parse the album covers from XML file
+      function parsingAlbumCovers(){
+        var api= "http://ws.audioscrobbler.com/2.0/?method=album.getinfo"; // putting API-address to pieces, this is the main part
+        var band = "&artist=";                                             // artist-part of the API-address
+        var apiKey= "&api_key=cb69910029b323867877c58ef0071f7a";           // API-key of API-address
+        var album = "&album="                                              // album-part of API-address
+      
+
+        var input1 = document.getElementById("search").value;           // selecting the input element and getting it's value + adding it to variable   
+        var input2 = document.getElementById("albumSearch").value;      // selecting the input-2 element and getting it's value + adding it to variable
+
+        if(isArtistInputOK(input1) && isAlbumInputOK(input2)){           // calling the functions to validate the inputs. The artist and album info are both needed
+        var url = api + apiKey + band + input1 + album+ input2;          // making a whole url for API with little parts as well as inputs
+        
+        var xmlhttp = new XMLHttpRequest(); // creating a new XMLHTTPRequest
+        xmlhttp.open("GET",url, true);      // initializing the created XMLHttpRequest
+        xmlhttp.send();                     // sending the new xmlhttpRequest
+
+        xmlhttp.onreadystatechange= function(){  // opening a function and defining it ro react on readyState changes
+          albumsButtonCount++;                   // incrementing the albums button counter. If the button is clicked, the counter will be incremented
+                                                 // If the buttton is clicked again, this counter will be used to close the div. The value will be
+                                                 // also set to zero. 
+          if(xmlhttp.readyState == 4 && xmlhttp.status==200) // defining the readyState to be finished request and xmlhttp status to OK
+          {
+            var xmlDoc = xmlhttp.responseXML; // saving the responseXML to variable
+
+            var album = xmlDoc.getElementsByTagName("album");  // digging out tags from xml-file and saving them to a variable
+             if(album[0].getElementsByTagName('image').item(3).firstChild == null){ //digging out the third image-tag and checking if its null
+               document.getElementById("alert").innerHTML = "Album not found";      // if the third image-tag is null, it will give error message
+
+              }else{                                             // otherwise code will jump here
+              var image = album[0].getElementsByTagName('image').item(3).firstChild.nodeValue; // save the third image-tag value to the variable
+
+              document.getElementById("imgInfo").src = image;   // showing off the image-variable in the "imgInfo"
+
+              } 
+          }else{                                                  // if the tags cannot be found the code will jump here and give error message
+            document.getElementById("alert").innerHTML= "API Address not found. Check input fields"; //showing the error message in a div
+          }
+          if(albumsButtonCount > 1){                              //counter of how many times the buttons were opened, if more than one
+                document.getElementById("imgInfo").src = "";      // it will blank the "imgInfo" div 
+                document.getElementById("alert").innerHTML = "";  // and "alert" divs 
+                albumsButtonCount = 0;                            // setting the counter to 0 again
+             }
+        }
+      }else{                                                       // if the inputs weren't ok the code will jump here
+              document.getElementById("imgInfo").src = "";         // it will blank the "imgInfo" div 
+              document.getElementById("alert").innerHTML = "";     // and "alert" divs 
+      }
+      
+    }
+      
+      // Artist bio parsing and button functionality
+      document.getElementById("bioButton").addEventListener("click", parsingBio);   // dynamically added onclick to run parsing Bio-function
+      document.getElementById("bioSummary").style.textAlign= "center";              // adding text align to the senter with the bioSummary 
+      
+      // Function to parse the biography of the artist from the XML file
+      function parsingBio(){
+
+        var api= "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo"; // putting API-address to pieces, this is the main part
+        var band = "&artist=";                                              // artist-part of the API-address
+        var apiKey= "&api_key=cb69910029b323867877c58ef0071f7a";            // API-key part of the API-address
+
+        var input = document.getElementById("search").value;               // selecting the input element and getting it's value + adding it to variable     
+        if(isArtistInputOK(input)){                                        // calling the function to validate the input
+
+        var url = api + band + input + apiKey;                         // collecting the url from the smaller pieces and inputs
+        var xmlhttp = new XMLHttpRequest();                            // creating new XMLHttpRequest
+        xmlhttp.open("GET",url, true);                                 // initializing the created XMLHttpRequest
+        xmlhttp.send();                                                // sending the new xmlhttpRequest
+      
+        xmlhttp.onreadystatechange = function(){ // opening a function and defining it to react on readyState changes
+          bioButtonCount++;                      // incrementing the bio button counter. If the button is clicked, the counter will be incremented
+                                                 // If the buttton is clicked again, this counter will be used to close the div. The value will be
+                                                 // also set to zero.
+          if(xmlhttp.readyState == 4 && xmlhttp.status==200) // defining the readyState to be finished request and xmlhttp status to OK
+          {
+            var xmlDoc = xmlhttp.responseXML;   // saving the responseXML to variable
+       
+            let txt = "";                      // variable to save the parsed biography from XML
+            var artist = xmlDoc.getElementsByTagName("artist"); // digging out the tags from xml-file and saving them to variable
+            if(artist.length < 1){               // if artist-tags length is smaller than one, the artis is not found
+              document.getElementById("alert3").innerHTML = "Artist not found"; // error message will be shown
+            }else{                               // otherwise the code will jump here
+              var bio = artist[0].getElementsByTagName("bio"); // digging the bio-tags from the xmlfile and saving them to variable
+              var summary = bio[0].getElementsByTagName("summary").item(0).firstChild.nodeValue;  //save the first summary-tag value to the variable 
+      
+              txt = "<br><strong>" + summary + "</strong><br>";      // txt-variable is line-break, strong characters and summary
+              document.getElementById("bioSummary").innerHTML = txt; // showing the txt-variable in "bioSummary" div on the page
+            }
+          }else{                                    // if the tags cannot be found the code will jump here and give error message
+            document.getElementById("alert3").innerHTML= "API Address not found. Check input fields"; // showing the error message in a div
+          }
+          if(bioButtonCount > 1){                   //counter of how many times the buttons were clicked, if more than one
+            document.getElementById("bioSummary").innerHTML = ""; // setting the "bioSummary" blank
+            document.getElementById("alert3").innerHTML= ""; // as well as alert3 div
+            bioButtonCount = 0;                    // setting the counter to zero again
+          }
+            
+        }
+        }else{                                      // if the inputs do not validate the code will jump here
+          document.getElementById("bioSummary").innerHTML = ""; // and set as blank  "bioSummary"
+          document.getElementById("alert3").innerHTML = "";     // and "alert3" divs
+        }
+      }
+  
+      // Band parsing and button functionality
+      document.getElementById("albumButton").addEventListener("click", parsingAlbums); // dynamically added onclick to run parsing Band-function
+      document.getElementById("albumInfo").style.textAlign= "center";                  // adding text align to the senter with the albumInfo 
+
+      // Function to parse the albums from XML file based on the artist data given
+      function parsingAlbums(){
+
+      var api= "http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums";       // putting API-address to pieces, this is the main part
+      var band = "&artist=";                                        // artist-part of the API-address
+      var apiKey= "&api_key=cb69910029b323867877c58ef0071f7a";      // API-key part of the API-address
+
+      var input = document.getElementById("search").value;           // selecting the input element and getting it's value + adding it to variable     
+
+      if(isArtistInputOK(input)){                                    // calling the function to validate the input (artist)
+      var url = api + band + input + apiKey;                         // putting an url together from smaller pieces
+      var xmlhttp = new XMLHttpRequest();                            // creating new XMLHttpRequest
+      xmlhttp.open("GET",url, true);                                 // initializing the created XMLHttpRequest
+      xmlhttp.send();                                                // sending the new xmlhttpRequest
+      
+      xmlhttp.onreadystatechange = function(){ // opening a function and defining it ro react on readyState changes
+          albumsButtonCount++;                 // incrementing the album button counter. If the button is clicked, the counter will be incremented
+                                               // If the buttton is clicked again, this counter will be used to close the div. The value will be
+                                               // also set to zero.
+          if(xmlhttp.readyState == 4 && xmlhttp.status==200) // defining the readyState to be finished request and xmlhttp status to OK
+          {
+            var xmlDoc = xmlhttp.responseXML; // saving the responseXML to variable
+
+            let txt = "";                      // variable to save the parsed album names from XML file
+            var album = xmlDoc.getElementsByTagName("album");  // digging out the tags from xml-file and saving them to variable
+            if(album.length  < 1){             // if album-tags length is smaller than one the artist is not found
+              document.getElementById("alert4").innerHTML = "Artist not found"; // error message wil be shown
+            }else{                              // otherwise code will jump here
+              var name = album[0].getElementsByTagName("name"); // and save name tags under album tags to the variable name
+              for (i=0; i < album.length; i++) {   // for-loop to iterate through all the albums
+                name = album[i].getElementsByTagName('name').item(0).firstChild.nodeValue; // save the first name-tag value to the variable 
+                txt += "<br><strong>" + name + "</strong><br>";       // txt-variable is line-break, strong characters + name 
+                document.getElementById("albumInfo").innerHTML = txt; // showing of the txt-variable on albumInfo-div
+              }
+            }
+          }else{                                 // if the tags are not found the code jumps here
+            document.getElementById("alert4").innerHTML= "API Address not found. Check input fields"; //and shows an error message
+          }
+
+          if(albumsButtonCount > 1){            //counter of how many times the buttons were opened, if more than one
+            document.getElementById("albumInfo").innerHTML= ""; // it will set albumInfo 
+            document.getElementById("alert4").innerHTML = "";   // and alert4-divs to blank
+            albumsButtonCount = 0;           // setting the counter to zero again.
+          }
+          
+        }
+      }else{                                    // if the input doesn't validate the code jumps here
+        document.getElementById("albumInfo").innerHTML= ""; //and sets divs albumInfo
+        document.getElementById("alert4").innerHTML = "";  //and alert4 to blank
+      }
+    }
+      
+        
+      
+      // Draugore's top 10 charts 
+      document.getElementById("numberOne").addEventListener("click", parsingNightwish); // dynamically added onclick to the button one
+
+      // Function to parse the Nightwish data
+      function parsingNightwish(){
+        var api= "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo"; // main part of the API-address
+        var band = "&artist=Nightwish";                          // artist-part of the API-address
+        var apiKey= "&api_key=cb69910029b323867877c58ef0071f7a"; // API-key 
+
+        
+        var url = api + band + apiKey;                     // full url made out of smaller pieces
+        var xmlhttp = new XMLHttpRequest();                // making a new XMLHttpRequest
+        xmlhttp.open("GET",url, true);                     // initializing the created XMLHttpRequest
+        xmlhttp.send();                                    // sending the xmlhttpRequest
+      
+        xmlhttp.onreadystatechange= function(){  // opening a function and defining it to react on readyState changes
+          if(xmlhttp.readyState == 4 && xmlhttp.status==200) // defining the readyState to be finished request and xmlhttp status to OK
+          {
+            var xmlDoc = xmlhttp.responseXML; // saving the responseXML to variable
+            
+            numberOneCount++;                 // incrementing the first button counter. If the button is clicked, the counter will be incremented
+                                              // If the buttton is clicked again, this counter will be used to close the div. The value will be
+                                              // also set to zero.
+            let txt = "";                     // variable to parse the biography of nightwish
+            
+            var artist = xmlDoc.getElementsByTagName("artist");   // digging out the tags from xml-file and saving them to the variable
+            var bio = artist[0].getElementsByTagName("bio");      // digging out the tags from xml-file and saving them to the variable
+
+            var content = bio[0].getElementsByTagName("content").item(0).firstChild.nodeValue; ////digging out the content-tags under bio-tags from the xml-file and saving them to the variable
+            txt = "<br><strong>" + content + "</strong><br>";      // txt variable is line-break + strong characters + content
+            if(numberOneCount > 1){                                // counter bigger than one
+              document.getElementById("one").innerHTML = "";       // blank
+              document.getElementById("photoOne").innerHTML= "";   // blank
+              numberOneCount = 0;                                  // setting counter to zero
+            }else{                                                 // otherwise
+              document.getElementById("one").innerHTML = txt;      // showing the text on the div
+              document.getElementById("photoOne").innerHTML = '<img src = "https://lastfm.freetls.fastly.net/i/u/770x0/f1a06b491a2a7f6a84be99ac1d40ab3c.jpg#f1a06b491a2a7f6a84be99ac1d40ab3c" class="center"/>'; //adding photo from another source as API's photos were all blank
+            }
+          }
+        } 
+      }
+
+      document.getElementById("numberTwo").addEventListener("click", parsingTurisas); // dynamically added onclick to the button two
+
+      // Function to parse Turisas data
+      function parsingTurisas(){
+        var api= "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo";  // main part of API-address
+        var band = "&artist=Turisas"; // artist part of API
+        var apiKey= "&api_key=cb69910029b323867877c58ef0071f7a"; // API-key
+
+        
+        var url = api + band + apiKey;                     // full url made out of smaller pieces
+        var xmlhttp = new XMLHttpRequest();                // making a new XMLHttpRequest
+        xmlhttp.open("GET",url, true);                     // initializing the created XMLHttpRequest
+        xmlhttp.send();                                    // sending the xmlhttpRequest
+      
+        xmlhttp.onreadystatechange= function(){  //opening a function and defining it ro react on readyState changes
+          if(xmlhttp.readyState == 4 && xmlhttp.status==200) //defining the readyState to be finished request and xmlhttp status to OK
+          {
+            var xmlDoc = xmlhttp.responseXML; //saving the responseXML to variable
+            
+            numberTwoCount++;                // incrementing the second button counter. If the button is clicked, the counter will be incremented
+                                             // If the buttton is clicked again, this counter will be used to close the div. The value will be
+                                             // also set to zero.
+            let txt = "";                    // variable to save the parsed biography
+            
+            var artist = xmlDoc.getElementsByTagName("artist");   // digging out the tags from xml-file and saving them to the variable
+            var bio = artist[0].getElementsByTagName("bio");      // digging out the tags from xml-file and saving them to the variable
+
+            var content = bio[0].getElementsByTagName("content").item(0).firstChild.nodeValue; ////digging out the content-tags under bio-tags from the xml-file and saving them to the variable
+            txt = "<br><strong>" + content + "</strong><br>";      // txt variable is line-break + strong characters + content
+            if(numberTwoCount > 1){              // counnter bigger than one
+              document.getElementById("two").innerHTML = ""; // blank
+              document.getElementById("photoTwo").innerHTML = ""; // blank
+              numberTwoCount = 0;                 // setting counter to zero
+            }else{                                // otherwise
+              document.getElementById("two").innerHTML = txt; //showing the txt in div
+              document.getElementById("photoTwo").innerHTML ='<img src ="https://lastfm.freetls.fastly.net/i/u/770x0/2e519228ca1240358dd5ea86484212aa.jpg#2e519228ca1240358dd5ea86484212aa" class="center" />'; //adding the pic from another source
+            }
+          }
+        } 
+      }
+
+      document.getElementById("numberThree").addEventListener("click", parsingEluveitie); // dynamically added onclick to the button three
+
+      // Function to parse Eluveitie data
+      function parsingEluveitie(){
+        var api= "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo"; // API address main part
+        var band = "&artist=Eluveitie"; // artist part of api
+        var apiKey= "&api_key=cb69910029b323867877c58ef0071f7a"; // API key
+
+        
+        var url = api + band + apiKey; //ful api-address 
+        var xmlhttp = new XMLHttpRequest();                // making a new XMLHttpRequest
+        xmlhttp.open("GET",url, true);                     // initializing the created XMLHttpRequest
+        xmlhttp.send();                                    // sending the xmlhttpRequest
+      
+        xmlhttp.onreadystatechange= function(){  // opening a function and defining it ro react on readyState changes
+          if(xmlhttp.readyState == 4 && xmlhttp.status==200) // defining the readyState to be finished request and xmlhttp status to OK
+          {
+            var xmlDoc = xmlhttp.responseXML; // saving the responseXML to variable
+            
+            numberThreeCount++;               // incrementing the third button counter. If the button is clicked, the counter will be incremented
+                                              // If the buttton is clicked again, this counter will be used to close the div. The value will be
+                                              // also set to zero.
+            let txt = "";                     // variable to save the parsed biography from XML file
+            
+            var artist = xmlDoc.getElementsByTagName("artist");   // digging out the tags from xml-file and saving them to the variable
+            var bio = artist[0].getElementsByTagName("bio");      // digging out the tags from xml-file and saving them to the variable
+
+            var content = bio[0].getElementsByTagName("content").item(0).firstChild.nodeValue; ////digging out the content-tags under bio-tags from the xml-file and saving them to the variable
+            txt = "<br><strong>" + content + "</strong><br>";      // txt variable is line-break + strong characters + content
+            if(numberThreeCount > 1){                              // if bigger than one
+              document.getElementById("three").innerHTML = "";     //blank
+              document.getElementById("photoThree").innerHTML = "";  //blank
+              numberThreeCount = 0;  // setting counter to zero
+            }else{                   // otherwise
+              document.getElementById("three").innerHTML = txt; // showing the txt in div
+              document.getElementById("photoThree").innerHTML = '<img src = "https://lastfm.freetls.fastly.net/i/u/770x0/596136ffe0b928f2d2f09cb6062728c7.jpg#596136ffe0b928f2d2f09cb6062728c7" class="center"/>'; //adding the pic from another source
+            }
+          }
+        } 
+      }
+
+      document.getElementById("numberFour").addEventListener("click", parsingViikate); //dynamically added onclick to the button four
+
+      // Function to parse Viikate data
+      function parsingViikate(){   // opening the function
+        var api= "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo"; //main part of api address
+        var band = "&artist=Viikate"; //artist part of api address
+        var apiKey= "&api_key=cb69910029b323867877c58ef0071f7a"; // API-key
+
+        
+        var url = api + band + apiKey; // whole url from smaller pieces
+        var xmlhttp = new XMLHttpRequest();                // making a new XMLHttpRequest
+        xmlhttp.open("GET",url, true);                     // initializing the created XMLHttpRequest
+        xmlhttp.send();                                    // sending the xmlhttpRequest
+      
+        xmlhttp.onreadystatechange= function(){  // opening a function and defining it ro react on readyState changes
+          if(xmlhttp.readyState == 4 && xmlhttp.status==200) // defining the readyState to be finished request and xmlhttp status to OK
+          {
+            var xmlDoc = xmlhttp.responseXML; // saving the responseXML to variable
+            
+            numberFourCount++;                // incrementing the fourth button counter. If the button is clicked, the counter will be incremented
+                                              // If the buttton is clicked again, this counter will be used to close the div. The value will be
+                                              // also set to zero.
+            let txt = "";                     // variable to show the parsed biography from XML data
+            
+            var artist = xmlDoc.getElementsByTagName("artist");   // digging out the tags from xml-file and saving them to the variable
+            var bio = artist[0].getElementsByTagName("bio");      // digging out the tags from xml-file and saving them to the variable
+
+            var content = bio[0].getElementsByTagName("content").item(0).firstChild.nodeValue; ////digging out the content-tags under bio-tags from the xml-file and saving them to the variable
+            txt = "<br><strong>" + content + "</strong><br>";     // txt variable is line-break + strong characters + content
+            if(numberFourCount > 1){                              // if bigger than one
+              document.getElementById("four").innerHTML = "";     // divs turn to blank
+              document.getElementById("photoFour").innerHTML = "";// blank
+              numberFourCount = 0;                                // setting counter to zero
+            }else{                                                //otherwise
+
+              document.getElementById("four").innerHTML = txt;    // showing the txt in a div
+              document.getElementById("photoFour").innerHTML = '<img src ="https://lastfm.freetls.fastly.net/i/u/770x0/73251ad6ff794b25aa9ddd61f0a9ee26.jpg#73251ad6ff794b25aa9ddd61f0a9ee26" class="center"/>'; // adding a pic from another source as api pictures were blank
+            }
+          }
+        } 
+      }
+
+      document.getElementById("numberFive").addEventListener("click", parsingAmorphis); // dynamically added onclick to the button five
+
+      // Function to parse Amorphis data
+      function parsingAmorphis(){  //opening the function
+        var api= "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo"; // main part of api-address
+        var band = "&artist=Amorphis"; //artist-part of api
+        var apiKey= "&api_key=cb69910029b323867877c58ef0071f7a"; //API-key
+
+        
+        var url = api + band + apiKey; // whole url 
+        var xmlhttp = new XMLHttpRequest();                // making a new XMLHttpRequest
+        xmlhttp.open("GET",url, true);                     // initializing the created XMLHttpRequest
+        xmlhttp.send();                                    // sending the xmlhttpRequest
+      
+        xmlhttp.onreadystatechange= function(){  //opening a function and defining it ro react on readyState changes
+          if(xmlhttp.readyState == 4 && xmlhttp.status==200) //defining the readyState to be finished request and xmlhttp status to OK
+          {
+            var xmlDoc = xmlhttp.responseXML; // saving the responseXML to variable
+            
+            numberFiveCount++;               // incrementing the fifth button counter. If the button is clicked, the counter will be incremented
+                                             // If the buttton is clicked again, this counter will be used to close the div. The value will be
+                                             // also set to zero.
+            let txt = "";                    // variable to save the parse biography from the XML file
+
+            var artist = xmlDoc.getElementsByTagName("artist");   // digging out the tags from xml-file and saving them to the variable
+            var bio = artist[0].getElementsByTagName("bio");      // digging out the tags from xml-file and saving them to the variable
+
+            var content = bio[0].getElementsByTagName("content").item(0).firstChild.nodeValue; //digging out the content-tags under bio-tags from the xml-file and saving them to the variable
+            txt = "<br><strong>" + content + "</strong><br>";      // txt variable is line-break + strong characters + content
+            if(numberFiveCount > 1){                               // if bigger than one
+              document.getElementById("five").innerHTML = "";      // divs become blank
+              document.getElementById("photoFive").innerHTML = ""; // blank
+              numberFiveCount = 0;                                 // setting counter to zero
+            }else{                                                 // otherwise,
+              document.getElementById("five").innerHTML = txt;     // showing the txt in a div
+              document.getElementById("photoFive").innerHTML = '<img src = "https://lastfm.freetls.fastly.net/i/u/770x0/765e91d1e63a1df41a1b57e775e779f4.jpg#765e91d1e63a1df41a1b57e775e779f4" class="center"/>'; //adding photo from another source 
+            }
+          }
+        } 
+      }
+
+      document.getElementById("numberSix").addEventListener("click", parsingMoonsorrow);//dynamically added onclick to the button six
+
+      // Function to parse Moonsorrow data
+      function parsingMoonsorrow(){      // opening a function
+        var api= "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo"; //main part of api-address
+        var band = "&artist=Moonsorrow"; // artist part of api
+        var apiKey= "&api_key=cb69910029b323867877c58ef0071f7a"; // api-key
+
+        
+        var url = api + band + apiKey; // whole url
+        var xmlhttp = new XMLHttpRequest();                // making a new XMLHttpRequest
+        xmlhttp.open("GET",url, true);                     // initializing the created XMLHttpRequest
+        xmlhttp.send();                                    // sending the xmlhttpRequest
+      
+        xmlhttp.onreadystatechange= function(){  // opening a function and defining it ro react on readyState changes
+          if(xmlhttp.readyState == 4 && xmlhttp.status==200) // defining the readyState to be finished request and xmlhttp status to OK
+          {
+            var xmlDoc = xmlhttp.responseXML; // saving the responseXML to variable
+            
+            numberSixCount++;                // incrementing the sixth button counter. If the button is clicked, the counter will be incremented
+                                             // If the buttton is clicked again, this counter will be used to close the div. The value will be
+                                             // also set to zero.
+            let txt = "";                    // variable to save the parsed biography from the XML file
+            
+            var artist = xmlDoc.getElementsByTagName("artist");   // digging out the tags from xml-file and saving them to the variable
+            var bio = artist[0].getElementsByTagName("bio");      // digging out the tags from xml-file and saving them to the variable
+
+            var content = bio[0].getElementsByTagName("content").item(0).firstChild.nodeValue; //digging out the content-tags under bio-tags from the xml-file and saving them to the variable
+            txt = "<br><strong>" + content + "</strong><br>";      // txt variable is line-break + strong characters + content
+            if(numberSixCount > 1){                                // if counter bigger than one
+              document.getElementById("six").innerHTML = "";       // divs are blank
+              document.getElementById("photoSix").innerHTML= "";   // blank
+              numberSixCount = 0;                                  // setting counter to zero
+            }else{                                                 // otherwise,
+              document.getElementById("six").innerHTML = txt;      // showing the txt in a div
+              document.getElementById("photoSix").innerHTML = '<img src = "https://lastfm.freetls.fastly.net/i/u/770x0/dfffe7e696631c5a008ff9e85d4dab44.jpg#dfffe7e696631c5a008ff9e85d4dab44" class="center"/>'; //adding a photo from another source
+            }
+          }
+        } 
+      }
+
+      document.getElementById("numberSeven").addEventListener("click", parsingHowardShore);//dynamically added onclick to the button seven
+
+      // Function to parse the HowardShore data
+      function parsingHowardShore(){ // opening a function
+        var api= "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo"; // main part of api-address
+        var band = "&artist=Howard+Shore"; // artist-part of api
+        var apiKey= "&api_key=cb69910029b323867877c58ef0071f7a"; // API-key
+
+        
+        var url = api + band + apiKey; // whole url from smaller pieces
+        var xmlhttp = new XMLHttpRequest();                // making a new XMLHttpRequest
+        xmlhttp.open("GET",url, true);                     // initializing the created XMLHttpRequest
+        xmlhttp.send();                                    // sending the xmlhttpRequest
+      
+        xmlhttp.onreadystatechange= function(){  // opening a function and defining it ro react on readyState changes
+          if(xmlhttp.readyState == 4 && xmlhttp.status==200) // defining the readyState to be finished request and xmlhttp status to OK
+          {
+            var xmlDoc = xmlhttp.responseXML; // saving the responseXML to variable
+            numberSevenCount++;               // incrementing the seventh button counter. If the button is clicked, the counter will be incremented
+                                              // If the buttton is clicked again, this counter will be used to close the div. The value will be
+                                              // also set to zero.
+            let txt = "";                     // variable to save the parse biography from XML file
+            
+            var artist = xmlDoc.getElementsByTagName("artist");   // digging out the tags from xml-file and saving them to the variable
+            var bio = artist[0].getElementsByTagName("bio");      // digging out the tags from xml-file and saving them to the variable
+
+            var content = bio[0].getElementsByTagName("content").item(0).firstChild.nodeValue; //digging out the content-tags under bio-tags from the xml-file and saving them to the variable
+            txt = "<br><strong>" + content + "</strong><br>";       // txt variable is line-break + strong characters + content
+            if(numberSevenCount > 1){                               // if counter is bigger than one..
+              document.getElementById("seven").innerHTML = "";      //..divs are blank
+              document.getElementById("photoSeven").innerHTML = ""; // blank
+              numberSevenCount = 0;                                 // setting counter to zero
+            }else{                                                  // otherwise,
+              document.getElementById("seven").innerHTML = txt;     // showing the txt in a div
+              document.getElementById("photoSeven").innerHTML = '<img src="https://lastfm.freetls.fastly.net/i/u/770x0/61e978c763b00928d019512651c1c3cd.jpg#61e978c763b00928d019512651c1c3cd" class="center"/>'; //adding a photo from another source
+            }
+          }
+        } 
+      }
+
+      document.getElementById("numberEight").addEventListener("click", parsingLeavesEyes); //dynamically added onclick to the button eight
+
+      // Function to parse LeavesEye data
+      function parsingLeavesEyes(){   // opening the function
+        var api= "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo"; //main part of api
+        var band = "&artist=Leaves'+Eyes"; //artist part of api-address
+        var apiKey= "&api_key=cb69910029b323867877c58ef0071f7a"; //api-key
+
+        
+        var url = api + band + apiKey; // url address from smaller pieces
+        var xmlhttp = new XMLHttpRequest();                // making a new XMLHttpRequest
+        xmlhttp.open("GET",url, true);                     // initializing the created XMLHttpRequest
+        xmlhttp.send();                                    // sending the xmlhttpRequest
+      
+        xmlhttp.onreadystatechange= function(){  // opening a function and defining it ro react on readyState changes
+          if(xmlhttp.readyState == 4 && xmlhttp.status==200) //defining the readyState to be finished request and xmlhttp status to OK
+          {
+            var xmlDoc = xmlhttp.responseXML; // saving the responseXML to variable
+            numberEightCount++;               // incrementing the eighth button counter. If the button is clicked, the counter will be incremented
+                                              // If the buttton is clicked again, this counter will be used to close the div. The value will be
+                                              // also set to zero.
+            let txt = "";                     // variable to save the parsed biography
+            
+            var artist = xmlDoc.getElementsByTagName("artist");   // digging out the tags from xml-file and saving them to the variable
+            var bio = artist[0].getElementsByTagName("bio");      // digging out the tags from xml-file and saving them to the variable
+
+            var content = bio[0].getElementsByTagName("content").item(0).firstChild.nodeValue; //digging out the content-tags under bio-tags from the xml-file and saving them to the variable
+            txt = "<br><strong>" + content + "</strong><br>";      // txt variable is line-break + strong characters + content
+            
+            if(numberEightCount > 1){                               // if a counter is bigger than one...
+              document.getElementById("eight").innerHTML = "";      // divs will be blank
+              document.getElementById("photoEight").innerHTML = ""; // blank
+              numberEightCount = 0;                                 // setting the counter to zero
+            }else{                                                  // otherwise, 
+              document.getElementById("eight").innerHTML = txt;     // showing the txt in a div
+              document.getElementById("photoEight").innerHTML= '<img src = "https://lastfm.freetls.fastly.net/i/u/770x0/961cad641c524f39921ccdae237a9538.jpg#961cad641c524f39921ccdae237a9538" class="center"/>'; //photo from another source
+            }
+          }
+        } 
+      }
+
+      document.getElementById("numberNine").addEventListener("click", parsingStam1na); // dynamically added onclick to the button nine
+
+      // Function to parse Stam1na data
+      function parsingStam1na(){ // opening the function
+        var api= "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo"; // main part of the api-address
+        var band = "&artist=Stam1na"; // artist part of the api address
+        var apiKey= "&api_key=cb69910029b323867877c58ef0071f7a"; // API-key
+
+        
+        var url = api + band + apiKey; // whole url from smaller pieces
+        var xmlhttp = new XMLHttpRequest();                // making a new XMLHttpRequest
+        xmlhttp.open("GET",url, true);                     // initializing the created XMLHttpRequest
+        xmlhttp.send();                                    // sending the xmlhttpRequest
+      
+        xmlhttp.onreadystatechange= function(){  // opening a function and defining it ro react on readyState changes
+          if(xmlhttp.readyState == 4 && xmlhttp.status==200) // defining the readyState to be finished request and xmlhttp status to OK
+          {
+            var xmlDoc = xmlhttp.responseXML; // saving the responseXML to variable
+            numberNineCount++;                // incrementing the nineth button counter. If the button is clicked, the counter will be incremented
+                                              // If the buttton is clicked again, this counter will be used to close the div. The value will be
+                                              // also set to zero.
+            let txt = "";                     // variable to save parsed biography from XML file
+            
+            var artist = xmlDoc.getElementsByTagName("artist");   // digging out the tags from xml-file and saving them to the variable
+            var bio = artist[0].getElementsByTagName("bio");      // digging out the tags from xml-file and saving them to the variable
+
+            var content = bio[0].getElementsByTagName("content").item(0).firstChild.nodeValue; //digging out the content-tags under bio-tags from the xml-file and saving them to the variable
+            txt = "<br><strong>" + content + "</strong><br>";      // txt variable is line-break + strong characters + content
+            if(numberNineCount > 1){                               // if counter is bigger than one...
+              document.getElementById("nine").innerHTML = "";      // divs will be blank
+              document.getElementById("photoNine").innerHTML = ""; // blank
+              numberNineCount = 0;                                 // setting counter to zero
+            }else{                                                 // otherwise...
+              document.getElementById("nine").innerHTML = txt;     // showing the txt in a div
+              document.getElementById("photoNine").innerHTML = '<img src="https://lastfm.freetls.fastly.net/i/u/770x0/83b38ac3b2b64367c3956d1e7c0f000e.jpg#83b38ac3b2b64367c3956d1e7c0f000e" class="center"/>'; //adding a photo from another source
+            }
+          }
+        } 
+      }
+      
+      document.getElementById("numberTen").addEventListener("click", parsingRasputina); //dynamically added onclick to the button ten
+
+      // Function to parse Rasputina data
+      function parsingRasputina(){  // opening a function
+
+      var api= "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo"; // main part of api-address
+      var band = "&artist=Rasputina"; //artist-part of api
+      var apiKey= "&api_key=cb69910029b323867877c58ef0071f7a"; // API-key
+
+  
+      var url = api + band + apiKey; //whole url from smaller pieces
+      var xmlhttp = new XMLHttpRequest();                // making a new XMLHttpRequest
+      xmlhttp.open("GET",url, true);                     // initializing the created XMLHttpRequest
+      xmlhttp.send();                                    // sending the xmlhttpRequest
+      
+      xmlhttp.onreadystatechange= function(){  //opening a function and defining it ro react on readyState changes
+        if(xmlhttp.readyState == 4 && xmlhttp.status==200) //defining the readyState to be finished request and xmlhttp status to OK
+        {
+          var xmlDoc = xmlhttp.responseXML; // saving the responseXML to variable
+          numberTenCount++;                 // incrementing the tenth button counter. If the button is clicked, the counter will be incremented
+                                            // If the buttton is clicked again, this counter will be used to close the div. The value will be
+                                            // also set to zero.
+          let txt = "";                     // variable to save the parsed biography from XML file
+            
+          var artist = xmlDoc.getElementsByTagName("artist");   // digging out the tags from xml-file and saving them to the variable
+          var bio = artist[0].getElementsByTagName("bio");      // sdigging out the tags from xml-file and saving them to the variable
+
+          var content = bio[0].getElementsByTagName("content").item(0).firstChild.nodeValue; //digging out the content-tags under bio-tags from the xml-file and saving them to the variable
+          txt = "<br><strong>" + content + "</strong><br>";      // txt variable is line-break + strong characters + content
+          if(numberTenCount > 1){                                // if counter is bigger than one...
+
+            document.getElementById("ten").innerHTML = "";             // divs are blank
+            document.getElementById("photoTen").innerHTML = "";        // blank
+            numberTenCount = 0;                                        // setting counter to zero
+          }else{                                                  // otherwise..
+
+            document.getElementById("ten").innerHTML = txt;           // showing txt in a div
+            document.getElementById("photoTen").innerHTML = '<img src="https://lastfm.freetls.fastly.net/i/u/770x0/1e8f4b5658c8f0d6bde5a0134d176b66.jpg#1e8f4b5658c8f0d6bde5a0134d176b66" class="center"/>'; // adding photo from another source as api-pictures were blank
+          }
+    }
+  } 
+} 
+  </script>
+
+</body>
+
+</HTML>

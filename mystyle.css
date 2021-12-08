@@ -1,0 +1,155 @@
+body{
+    background-color: rgb(160, 244, 249)
+}
+.center{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h2{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+h3{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#draugoreCharts{
+    background-color: rgba(176, 228, 230, 0.6);
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 10px;
+    background-color:rgba(176, 228, 230, 0.6);
+  }
+
+
+
+#search{
+    background-color: rgb(160, 244, 249);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    
+}
+#search:hover{
+    background-color: rgb(223, 182, 249) ;
+
+}
+
+#albumSearch{
+    background-color: rgb(160, 244, 249);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+#albumSearch:hover{
+    background-color: rgb(223, 182, 249) 
+}
+
+/* Search buttons */
+#albumButton{
+    background-color:rgb(107, 201, 215);
+    border-radius: 50%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+#albumButton:hover{
+    background-color: rgb(223, 182, 249) 
+}
+#bioButton{
+    background-color:rgb(107, 201, 215);
+    border-radius: 50%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+#bioButton:hover{
+    background-color: rgb(223, 182, 249) 
+}
+
+#albumsButton{
+    background-color:rgb(107, 201, 215);
+    border-radius: 50%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+#albumsButton:hover{
+    background-color: rgb(223, 182, 249) 
+}
+
+#trackButton{
+    background-color:rgb(107, 201, 215);
+    border-radius: 50%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#trackButton:hover{
+    background-color: rgb(223, 182, 249)  
+}
+
+/*Draugore's chart buttons */
+#numberOne{
+    background-color: powderblue;
+    color: rgb(38, 69, 74);
+    border-radius: 15%;
+    font-family: cursive;
+}
+#numberTwo{
+    background-color: powderblue;
+    color: rgb(38, 69, 74);
+    border-radius: 15%;
+    font-family: monospace;
+}
+
+#numberThree{
+    background-color: powderblue;
+    color: rgb(38, 69, 74);
+    border-radius: 15%;
+    font-family: fantasy;
+}
+
+#numberFour{
+    background-color: powderblue;
+    color: rgb(38, 69, 74);
+    border-radius: 15%;
+    font-family: serif;
+}
+
+#numberFive{
+    background-color: powderblue;
+    color: rgb(38, 69, 74);
+    border-radius: 15%;
+    font-family: monospace;
+}
+
+#numberSix{
+    background-color: powderblue;
+    color: rgb(38, 69, 74);
+    border-radius: 15%;
+    font-family: unset;
+}
+
+#numberSeven{
+    background-color: powderblue;
+    color: rgb(38, 69, 74);
+    border-radius: 15%;
+    font-family: fantasy;
+}
+
+#numberEight{
+    background-color: powderblue;
+    color: rgb(38, 69, 74);
+    border-radius: 15%;
+    font-family: cursive;
+}
+
+#numberNine{
+    background-color: powderblue;
+    color: rgb(38, 69, 74);
+    border-radius: 15%;
+    font-family: monospace;
+}
+
+#numberTen{
+    background-color: powderblue;
+    color: rgb(38, 69, 74);
+    border-radius: 15%;
+    font-family: cursive;
+}
+
