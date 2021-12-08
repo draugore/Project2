@@ -155,7 +155,7 @@
     // Function to parse the track of the album in the XML file
     function parsingTracks(){   // staring function Parsing Tracks
       
-    var api= "http://ws.audioscrobbler.com/2.0/?method=album.getinfo"; // getting the basic part of API-address
+    var api= "https://ws.audioscrobbler.com/2.0/?method=album.getinfo"; // getting the basic part of API-address
         var band = "&artist=";   // adding the artist part to the API-address
         var apiKey= "&api_key=cb69910029b323867877c58ef0071f7a";  //adding the API-key to the API-address
         var album = "&album=" // adding album-part to the API-address
@@ -219,7 +219,7 @@
       
       // function to parse the album covers from XML file
       function parsingAlbumCovers(){
-        var api= "http://ws.audioscrobbler.com/2.0/?method=album.getinfo"; // putting API-address to pieces, this is the main part
+        var api= "https://ws.audioscrobbler.com/2.0/?method=album.getinfo"; // putting API-address to pieces, this is the main part
         var band = "&artist=";                                             // artist-part of the API-address
         var apiKey= "&api_key=cb69910029b323867877c58ef0071f7a";           // API-key of API-address
         var album = "&album="                                              // album-part of API-address
@@ -276,7 +276,7 @@
       // Function to parse the biography of the artist from the XML file
       function parsingBio(){
 
-        var api= "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo"; // putting API-address to pieces, this is the main part
+        var api= "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo"; // putting API-address to pieces, this is the main part
         var band = "&artist=";                                              // artist-part of the API-address
         var apiKey= "&api_key=cb69910029b323867877c58ef0071f7a";            // API-key part of the API-address
 
@@ -330,7 +330,7 @@
       // Function to parse the albums from XML file based on the artist data given
       function parsingAlbums(){
 
-      var api= "http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums";       // putting API-address to pieces, this is the main part
+      var api= "https://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums";       // putting API-address to pieces, this is the main part
       var band = "&artist=";                                        // artist-part of the API-address
       var apiKey= "&api_key=cb69910029b323867877c58ef0071f7a";      // API-key part of the API-address
 
@@ -386,7 +386,7 @@
 
       // Function to parse the Nightwish data
       function parsingNightwish(){
-        var api= "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo"; // main part of the API-address
+        var api= "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo"; // main part of the API-address
         var band = "&artist=Nightwish";                          // artist-part of the API-address
         var apiKey= "&api_key=cb69910029b323867877c58ef0071f7a"; // API-key 
 
@@ -427,7 +427,7 @@
 
       // Function to parse Turisas data
       function parsingTurisas(){
-        var api= "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo";  // main part of API-address
+        var api= "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo";  // main part of API-address
         var band = "&artist=Turisas"; // artist part of API
         var apiKey= "&api_key=cb69910029b323867877c58ef0071f7a"; // API-key
 
@@ -468,7 +468,7 @@
 
       // Function to parse Eluveitie data
       function parsingEluveitie(){
-        var api= "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo"; // API address main part
+        var api= "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo"; // API address main part
         var band = "&artist=Eluveitie"; // artist part of api
         var apiKey= "&api_key=cb69910029b323867877c58ef0071f7a"; // API key
 
@@ -509,7 +509,7 @@
 
       // Function to parse Viikate data
       function parsingViikate(){   // opening the function
-        var api= "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo"; //main part of api address
+        var api= "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo"; //main part of api address
         var band = "&artist=Viikate"; //artist part of api address
         var apiKey= "&api_key=cb69910029b323867877c58ef0071f7a"; // API-key
 
@@ -551,7 +551,7 @@
 
       // Function to parse Amorphis data
       function parsingAmorphis(){  //opening the function
-        var api= "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo"; // main part of api-address
+        var api= "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo"; // main part of api-address
         var band = "&artist=Amorphis"; //artist-part of api
         var apiKey= "&api_key=cb69910029b323867877c58ef0071f7a"; //API-key
 
@@ -592,7 +592,7 @@
 
       // Function to parse Moonsorrow data
       function parsingMoonsorrow(){      // opening a function
-        var api= "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo"; //main part of api-address
+        var api= "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo"; //main part of api-address
         var band = "&artist=Moonsorrow"; // artist part of api
         var apiKey= "&api_key=cb69910029b323867877c58ef0071f7a"; // api-key
 
@@ -633,7 +633,7 @@
 
       // Function to parse the HowardShore data
       function parsingHowardShore(){ // opening a function
-        var api= "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo"; // main part of api-address
+        var api= "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo"; // main part of api-address
         var band = "&artist=Howard+Shore"; // artist-part of api
         var apiKey= "&api_key=cb69910029b323867877c58ef0071f7a"; // API-key
 
@@ -673,7 +673,7 @@
 
       // Function to parse LeavesEye data
       function parsingLeavesEyes(){   // opening the function
-        var api= "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo"; //main part of api
+        var api= "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo"; //main part of api
         var band = "&artist=Leaves'+Eyes"; //artist part of api-address
         var apiKey= "&api_key=cb69910029b323867877c58ef0071f7a"; //api-key
 
@@ -714,7 +714,7 @@
 
       // Function to parse Stam1na data
       function parsingStam1na(){ // opening the function
-        var api= "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo"; // main part of the api-address
+        var api= "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo"; // main part of the api-address
         var band = "&artist=Stam1na"; // artist part of the api address
         var apiKey= "&api_key=cb69910029b323867877c58ef0071f7a"; // API-key
 
@@ -755,7 +755,7 @@
       // Function to parse Rasputina data
       function parsingRasputina(){  // opening a function
 
-      var api= "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo"; // main part of api-address
+      var api= "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo"; // main part of api-address
       var band = "&artist=Rasputina"; //artist-part of api
       var apiKey= "&api_key=cb69910029b323867877c58ef0071f7a"; // API-key
 
